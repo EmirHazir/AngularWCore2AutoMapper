@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AngularWCore2.ContextFiles;
+using Microsoft.EntityFrameworkCore;
+using AngularWCore2.Mappings;
 
 namespace AngularWCore2
 {
@@ -22,6 +25,15 @@ namespace AngularWCore2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            var congif = new AutoMapper.MapperConfiguration(c =>
+            {
+                c.AddProfile(new MappingProfile());
+            });
+
+            var mapper = congif.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddMvc();
         }
 

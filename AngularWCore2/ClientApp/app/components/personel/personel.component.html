@@ -1,0 +1,17 @@
+
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Adi Soyadi</th>
+            <th>TC</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of personeller">
+            <td>{{ item.adi }} {{item.soyadi}}</td>
+            <td>{{ item.tckn }}</td>
+            <td>{{ item.email }}</td>
+        </tr>
+    </tbody>
+</table>
